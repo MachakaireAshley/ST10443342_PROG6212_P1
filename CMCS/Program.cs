@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using CMCS.Data;
+
 namespace CMCS
 {
     public class Program
@@ -8,6 +11,8 @@ namespace CMCS
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            var conn = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
 
             var app = builder.Build();
 
